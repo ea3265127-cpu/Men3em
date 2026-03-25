@@ -1,35 +1,125 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 body {
-  background-color: #FFFFFF;
+  background-color: #f5f7fb;
+  margin: 0;
+  font-family: Arial;
+  text-align: center;
+}
+
+/* شريط الدعاء */
+.dua-bar {
+  background: linear-gradient(135deg,#007BFF,#00c6ff);
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* حركة النص */
+.dua-text {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll 12s linear infinite;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* الكارد */
+.card {
+  margin: 12px;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: 0.2s;
+}
+
+.card:active {
+  transform: scale(0.97);
+}
+
+.card img {
+  width: 100%;
 }
 </style>
 </head>
+
 <body>
 
+<!-- 🔊 صوت -->
+<audio id="sound" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"></audio>
+
+<!-- الدعاء -->
+<div class="dua-bar">
+  <div class="dua-text" id="duaText"></div>
+</div>
+
+<!-- الأقسام زي ما هي -->
+
+<div class="card">
+<a href="go:0">
+<img src="https://www.raed.net/img?id=1526937">
+</a>
+</div>
+
+<div class="card">
+<a href="go:2">
+<img src="https://www.raed.net/img?id=1526938">
+</a>
+</div>
+
+<div class="card">
+<a href="go:61">
+<img src="https://www.raed.net/img?id=1527012">
+</a>
+</div>
+
+<div class="card">
+<a href="go:301">
+<img src="https://www.raed.net/img?id=1528047">
+</a>
+</div>
+
 <script>
-if(localStorage.getItem("loggedIn") !== "true"){
-  window.location.href = "index.html";
+var duas = [
+"اللهم اجعل هذا اليوم بداية خير وبركة",
+"اللهم ارزقنا التوفيق والنجاح في كل خطوة",
+"اللهم افتح علينا أبواب العلم النافع",
+"اللهم لا سهل إلا ما جعلته سهلاً",
+"اللهم ارزقنا الفهم السريع والحفظ القوي",
+"اللهم اجعلنا من المتفوقين الناجحين",
+"اللهم بارك لنا في وقتنا وجهدنا",
+"اللهم اجعل تعبنا سببًا في نجاحنا",
+"اللهم ارزقنا أعلى الدرجات",
+"اللهم اجعل أيامنا كلها نجاح وتوفيق"
+];
+
+function changeDua(){
+  var random = duas[Math.floor(Math.random() * duas.length)];
+  document.getElementById("duaText").innerText = random;
+
+  // تشغيل الصوت
+  var sound = document.getElementById("sound");
+  sound.currentTime = 0;
+  sound.play();
 }
+
+// أول تشغيل
+changeDua();
+
+// كل 5 ثواني
+setInterval(changeDua, 5000);
 </script>
-
-<center><a href="go:0">
-<img src="https://www.raed.net/img?id=1526937" width="100%">
-</a>
-
-<center><a href="go:2">
-<img src="https://www.raed.net/img?id=1526938" width="100%">
-</a>
-
-<center><a href="go:61">
-<img src="https://www.raed.net/img?id=1527012" width="100%">
-</a>
-
-<center><a href="go:301">
-<img src="https://www.raed.net/img?id=1528047" width="100%">
-</a>
 
 </body>
 </html>
