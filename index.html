@@ -9,6 +9,9 @@
 
 <h2>تسجيل الدخول</h2>
 
+<input type="email" id="email" placeholder="الإيميل"><br><br>
+<input type="password" id="password" placeholder="كلمة المرور"><br><br>
+
 <select id="role">
   <option value="">اختر النوع</option>
   <option value="طالب">طالب</option>
@@ -18,19 +21,47 @@
 
 <br><br>
 
-<button onclick="login()">دخول</button>
+<button onclick="login()">تسجيل الدخول</button>
+<button onclick="register()">إنشاء حساب</button>
 
 <script>
-function login(){
+// لو المستخدم مسجل قبل كده يدخل علطول
+if(localStorage.getItem("loggedIn") === "true"){
+  window.location.href = "home.html";
+}
+
+// تسجيل حساب جديد
+function register(){
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
   var role = document.getElementById("role").value;
 
-  if(role === ""){
-    alert("اختار نوع المستخدم");
+  if(email === "" || password === "" || role === ""){
+    alert("املى كل البيانات");
     return;
   }
 
-  localStorage.setItem("loggedIn","true");
-  window.location.href = "home.html";
+  localStorage.setItem("email", email);
+  localStorage.setItem("password", password);
+  localStorage.setItem("role", role);
+
+  alert("تم إنشاء الحساب ✅");
+}
+
+// تسجيل الدخول
+function login(){
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+
+  if(email === localStorage.getItem("email") &&
+     password === localStorage.getItem("password")){
+
+    localStorage.setItem("loggedIn","true");
+    window.location.href = "home.html";
+
+  } else {
+    alert("بيانات غلط ❌");
+  }
 }
 </script>
 
